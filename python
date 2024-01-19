@@ -1,0 +1,41 @@
+import digitalio
+import time
+
+# Configure GPIO pins for input
+sum_pin = digitalio.DigitalInOut(board.GP17)
+sum_pin.direction = digitalio.Direction.INPUT
+
+sum2_pin = digitalio.DigitalInOut(board.GP18)
+sum2_pin.direction = digitalio.Direction.INPUT
+
+carry_out_pin = digitalio.DigitalInOut(board.GP19)
+carry_out_pin.direction = digitalio.Direction.INPUT
+
+print("\n\nStart ...\n\n")
+
+while True:
+    sum_voltage = sum_pin.value
+    sum2_voltage = sum2_pin.value
+    carry_out_voltage = carry_out_pin.value
+
+    binary_sum = int(sum_pin.value)
+    binary_sum2 = int(sum2_pin.value)
+    binary_carry_out = int(carry_out_pin.value)
+
+    binary_number = f'{binary_carry_out}{binary_sum2}{binary_sum}'
+
+    decimal_sum = binary_sum * (2 ** 0)
+    decimal_sum2 = binary_sum2 * (2 ** 1)
+    decimal_carry_out = binary_carry_out * (2 ** 2)
+
+    print(f'Binary Sum: {binary_sum}')
+    print(f'Binary Sum2: {binary_sum2}')
+    print(f'Binary Carry-Out: {binary_carry_out}')
+    print(f'Binary Number: {binary_number}')
+    print(f'Decimal Sum: {decimal_sum}')
+    print(f'Decimal Carry-Out: {decimal_carry_out}')
+
+    decimal_total = decimal_sum + decimal_sum2 + decimal_carry_out
+    print(f'Decimal Total: {decimal_total}')
+
+    time.sleep(5)  # Adjust the delay as needed
